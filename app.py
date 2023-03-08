@@ -5,18 +5,24 @@ app = Flask(__name__)
 app.secret_key = 'your-secret-key'
 oauth = OAuth(app)
 
-google = oauth.remote_app(
+limiter = Limiter(
+    app,
+    key_func=get_remote_address,
+    default_limits=["1000 per day", "50 per hour"]
+)
+# get base domain of app
+client = oauth.remote_app(
     'google',
-    consumer_key='your-google-client-id',
-    consumer_secret='your-google-client-secret',
+    consumer_key='your-client-id',
+    consumer_secret='your-client-secret',
     request_token_params={
         'scope': 'email'
     },
-    base_url='https://www.googleapis.com/oauth2/v1/',
+    base_url='https://www.render-url.com/oauth2/v1/',
     request_token_url=None,
     access_token_method='POST',
-    access_token_url='https://accounts.google.com/o/oauth2/token',
-    authorize_url='https://accounts.google.com/o/oauth2/auth'
+    access_token_url='https://render-url.com/o/oauth2/token',
+    authorize_url='https://render-url.com/o/oauth2/auth'
 )
 
 @app.route('/')
@@ -26,11 +32,11 @@ def index():
 @app.route('/login')
 def login():
     callback_url = url_for('authorized', _external=True)
-    return google.authorize(callback=callback_url)
+    return client.authorize(callback=callback_url)
 
 @app.route('/authorized')
 def authorized():
-    resp = google.authorized_response()
+    resp = client.authorized_response()
     if resp is None:
         return 'Access denied: reason=%s error=%s' % (
             request.args['error_reason'],
