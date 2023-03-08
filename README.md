@@ -1,6 +1,6 @@
 # Unity Wallet API
 
-The Unity Wallet API is a secure identification API that allows Unity developers to access our wallet infrastructure and facilitate on-chain transactions for their users. This API provides a unique identifier and a secure key that developers can use to authenticate and authorize their users.
+The Unity Wallet API is a secure identification API that allows Unity developers to access the Ethos wallet infrastructure and facilitate on-chain transactions. This API provides a unique identifier and a secure key that developers can use to authenticate and authorize.
 
 ## Features
 
