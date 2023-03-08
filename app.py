@@ -12,7 +12,7 @@ limiter = Limiter(
 )
 # get base domain of app
 client = oauth.remote_app(
-    'google',
+    'unity-wallet-api',
     consumer_key='your-client-id',
     consumer_secret='your-client-secret',
     request_token_params={
