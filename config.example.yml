@@ -1,0 +1,22 @@
+# Flask app configuration
+FLASK_ENV: development
+FLASK_APP: app.py
+
+# API configuration
+API_KEY: your-api-key
+OAUTH_CLIENT_ID: your-oauth-client-id
+OAUTH_CLIENT_SECRET: your-oauth-client-secret
+
+# Redis configuration
+REDIS_URL: redis://localhost:6379/0
+REDIS_MAX_CONNECTIONS: 20
+
+# Rate limiting configuration
+RATELIMIT_ENABLED: true
+RATELIMIT_STORAGE_URL: redis://localhost:6379/1
+RATELIMIT_HEADERS_ENABLED: true
+RATELIMIT_GLOBAL_LIMITS: "100 per minute"
+
+# Sentry configuration
+SENTRY_DSN: your-sentry-dsn
+SENTRY_LOG_LEVEL: ERROR
